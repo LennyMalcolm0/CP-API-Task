@@ -6,7 +6,7 @@ const AppLayout = ({children}: AppLayoutProps) => {
 
     return (  
         <div className="h-full w-full flex">
-            <nav className="h-full flex flex-col justify-between py-12 px-10 shadow-[0px_4px_23px_0px_rgba(0,0,0,0.05)]">
+            <nav className="h-full flex flex-col justify-between py-12 px-10 relative z-[9999] shadow-[0px_4px_23px_0px_rgba(0,0,0,0.05)]">
                 <div className="flex flex-col items-center">
                     <img src="/hamburger.svg" alt="Menu" />
                     <img 
@@ -18,8 +18,8 @@ const AppLayout = ({children}: AppLayoutProps) => {
                 </div>
                 <div className="p-[6px] rounded-full bg-[#1D4ED8] font-bold text-white text-center">NT</div>
             </nav>
-            <section className="grow pt-28 overflow-hidden">
-                <div className="px-10 flex shadow-[0px_1px_18px_0px_rgba(0,0,0,0.12)] font-inter">
+            <section className="grow overflow-auto">
+                <div className="sticky top-0 z-[999] mt-28 px-10 bg-white flex shadow-[0px_1px_18px_0px_rgba(0,0,0,0.12)] font-inter">
                     {headerItems.map((item, index) => (
                         <div 
                             key={index} 
