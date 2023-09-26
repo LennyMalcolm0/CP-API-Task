@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import QuestionChoice from "./QuestionChoice";
 
-const AddQuestionPopup = () => {
+interface AddQuestionPopupProps {
+    setShowPopup: React.Dispatch<SetStateAction<boolean>>;
+}
+const AddQuestionPopup = ({setShowPopup}: AddQuestionPopupProps) => {
     const [questionType, setQuestionType] = useState("");
     const [showQuestionTypesDropdown, setShowQuestionTypesDropdown] = useState(false);
     const [choiceOptions, setChoiceOptions] = 
@@ -80,7 +83,10 @@ const AddQuestionPopup = () => {
                     }
 
                     <div className="flex items-center justify-between">
-                        <div className="w-fit flex items-center gap-1 cursor-pointer">
+                        <div 
+                            onClick={() => setShowPopup(false)}
+                            className="w-fit flex items-center gap-1 cursor-pointer"
+                        >
                             <img src="/cancel.svg" alt="Cancel" />
                             <div className="text-[15px] text-[#A80000] font-semibold">Delete question</div>
                         </div>

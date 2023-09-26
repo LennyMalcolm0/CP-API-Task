@@ -4,7 +4,6 @@ import { useState } from 'react';
 import PersonalInformation from "./forms/PersonalInformation";
 import Profile from "./forms/Profile";
 import AdditionalQuestions from "./forms/AdditionalQuestions";
-import AddQuestionPopup from "./components/AddQuestionPopup";
 
 function App() {
   const [coverImageUrl, setCoverImageUrl] = useState("");
@@ -23,7 +22,6 @@ function App() {
             <PersonalInformation />
             <Profile />
             <AdditionalQuestions />
-            <AddQuestionPopup />
           </div>
         )}/>
       </main>

@@ -1,8 +1,13 @@
+import { useState } from "react";
 import CardContainer from "../components/CardContainer";
 import DefaultFields from "../components/DefaultFields";
+import AddQuestionPopup from "../components/AddQuestionPopup";
 
 const PersonalInformation = () => {
+    const [showAddQuestionPopup, setShowAddQuestionPopup] = useState(false);
+    
     return (  
+        <>
         <CardContainer
             title="Personal Information"
             content={(
@@ -45,13 +50,21 @@ const PersonalInformation = () => {
                         checkBoxLabel="Internal"
                         lastField
                     />
-                    <div className="w-fit flex items-center gap-3 text-[15px] font-semibold mt-3 cursor-pointer">
+                    <div 
+                        onClick={() => setShowAddQuestionPopup(true)}
+                        className="w-fit flex items-center gap-3 text-[15px] font-semibold mt-3 cursor-pointer"
+                    >
                         <img src="/plus.svg" alt="Plus" className="h-5" />
                         <span>Add a question</span>
                     </div>
                 </div>
             )}
         />
+
+        {showAddQuestionPopup && 
+            <AddQuestionPopup setShowPopup={setShowAddQuestionPopup} />
+        }
+        </>
     );
 }
  
