@@ -7,8 +7,7 @@ interface AddQuestionPopupProps {
 const AddQuestionPopup = ({setShowPopup}: AddQuestionPopupProps) => {
     const [questionType, setQuestionType] = useState("");
     const [showQuestionTypesDropdown, setShowQuestionTypesDropdown] = useState(false);
-    const [choiceOptions, setChoiceOptions] = 
-        useState<(string)[]>([""]);
+    const [choiceOptions, setChoiceOptions] = useState<string[]>([""]);
 
     return (  
         <div className="fixed inset-0 z-[999999] w-screen h-screen bg-[#1A1B1B] bg-opacity-70 grid place-content-center">

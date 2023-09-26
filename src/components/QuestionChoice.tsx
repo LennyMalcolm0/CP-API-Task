@@ -3,8 +3,9 @@ import { SetStateAction } from "react";
 interface QuestionChoiceProps {
     options: string[];
     setOptions: React.Dispatch<SetStateAction<string[]>>;
+    enableOtherOption?: boolean;
 }
-const QuestionChoice = ({options, setOptions}: QuestionChoiceProps) => {
+const QuestionChoice = ({options, setOptions, enableOtherOption}: QuestionChoiceProps) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const value = event.target.value;
         const updatedOptions = [...options];
@@ -55,6 +56,17 @@ const QuestionChoice = ({options, setOptions}: QuestionChoiceProps) => {
                     >+</span>
                 </div>
             ))}
+
+            <span className="flex items-center gap-3 px-4 mt-5">
+                <input 
+                    type="checkbox" 
+                    name="checkbox" 
+                    defaultChecked={enableOtherOption === true}
+                    value={"yes"}
+                    className="accent-[#087B2F] scale-[1.3] z-[11]" 
+                />
+                <label htmlFor="checkbox" className="text-[15px]">Enable “Other” option</label>
+            </span>
         </div>
     );
 }
