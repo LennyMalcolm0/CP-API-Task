@@ -3,9 +3,10 @@ import { SetStateAction } from "react";
 interface QuestionChoiceProps {
     options: string[];
     setOptions: React.Dispatch<SetStateAction<string[]>>;
-    enableOtherOption?: boolean;
+    checkBoxDefaultValue?: boolean;
+    checkBoxOnChange?: () => void;
 }
-const QuestionChoice = ({options, setOptions, enableOtherOption}: QuestionChoiceProps) => {
+const QuestionChoice = ({options, setOptions, checkBoxDefaultValue, checkBoxOnChange}: QuestionChoiceProps) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const value = event.target.value;
         const updatedOptions = [...options];
@@ -33,7 +34,7 @@ const QuestionChoice = ({options, setOptions, enableOtherOption}: QuestionChoice
     };
 
     return (  
-        <div className="w-full mb-8">
+        <div className="w-full mb-6">
             <label htmlFor="type" className="text-xl font-semibold pl-6">Choice</label>
 
             {options.map((option, index) => (
@@ -61,8 +62,9 @@ const QuestionChoice = ({options, setOptions, enableOtherOption}: QuestionChoice
                 <input 
                     type="checkbox" 
                     name="checkbox" 
-                    defaultChecked={enableOtherOption === true}
+                    defaultChecked={checkBoxDefaultValue === true}
                     value={"yes"}
+                    onChange={checkBoxOnChange}
                     className="accent-[#087B2F] scale-[1.3] z-[11]" 
                 />
                 <label htmlFor="checkbox" className="text-[15px]">Enable “Other” option</label>

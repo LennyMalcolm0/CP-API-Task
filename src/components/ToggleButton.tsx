@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 interface ToggleButtonProps {
     checked: boolean;
 }
 const ToggleButton = ({checked}: ToggleButtonProps) => {
     const [show, setShow] = useState(checked);
+    useEffect(() => setShow(checked), [checked])
 
     return (  
         <span 

@@ -47,11 +47,11 @@ const CustomizedQuestion = ({question, lastField}: CustomizedQuestionProps) => {
                         />
                     </>
 
-                    {(question.choices?.length && question.choices?.length > 0) &&
+                    {(question.type === "MultipleChoice" || question.type === "Dropdown") &&
                         <QuestionChoice 
                             options={choiceOptions as string[]}
                             setOptions={setChoiceOptions as React.Dispatch<SetStateAction<string[]>>}
-                            enableOtherOption={question.other}
+                            checkBoxDefaultValue={question.other}
                         />
                     }
 

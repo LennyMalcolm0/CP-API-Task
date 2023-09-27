@@ -3,6 +3,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create({
     baseURL: "http://127.0.0.1:4010",
+    timeout: 10000,
     validateStatus: function (status) {
         return status >= 200 && status < 300;
     },

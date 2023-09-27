@@ -1,10 +1,39 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AddQuestionPopup from "../components/AddQuestionPopup";
 import CardContainer from "../components/CardContainer";
-import CustomizedQuestion from "../components/CustomizedQuestion";
+import FormQuestion from "../components/FormQuestion";
+import { FormDataContext } from "../App";
+import { QuestionTemplate } from "../dataTypes";
+import { HttpClient } from "../axiosRequest";
 
 const AdditionalQuestions = () => {
+    const formData = useContext(FormDataContext);
     const [showAddQuestionPopup, setShowAddQuestionPopup] = useState(false);
+    const [customisedQuestions, setCustomizedQuestions] = useState<QuestionTemplate[]>([]);
+
+    useEffect(() => {
+        if (!formData) return;
+        setCustomizedQuestions(formData?.attributes.customisedQuestions || []);
+    }, [formData])
+
+    const updateCustomizedQuestions = async (customisedQuestions: QuestionTemplate[]) => {
+        if (!formData) return false;
+
+        const requestBody = formData;
+        if (!requestBody.attributes.customisedQuestions) return false;
+        requestBody.attributes.customisedQuestions = customisedQuestions;
+
+        const { error } = await HttpClient.put(
+            "/api/144.9397931391233/programs/mock/application-form", 
+            { data: requestBody }
+        )
+
+        if (error) {
+            return false
+        } else {
+            return true
+        }
+    };
 
     return (  
         <>
@@ -12,14 +41,14 @@ const AdditionalQuestions = () => {
             title="Additional Questions"
             content={(
                 <div className="px-[30px] pt-5 pb-10">
-                    <CustomizedQuestion 
-                        question={{
-                            type: "Dropdown",
-                            question: "Hello baby validation rules described in your API description document?",
-                            choices: ["Hello", "What's up", "Hola"]
-                        }}
-                    />
-                    <div 
+                    {customisedQuestions.map((question) => (
+                        <FormQuestion 
+                            key={question.id}
+                            question={question}
+                        />
+                    ))}
+
+                    <div
                         onClick={() => setShowAddQuestionPopup(true)}
                         className="w-fit flex items-center gap-3 text-[15px] font-semibold mt-3 cursor-pointer"
                     >
@@ -31,7 +60,12 @@ const AdditionalQuestions = () => {
         />
 
         {showAddQuestionPopup && 
-            <AddQuestionPopup setShowPopup={setShowAddQuestionPopup} />
+            <AddQuestionPopup 
+                existingQuestions={customisedQuestions}
+                setShowPopup={setShowAddQuestionPopup} 
+                onSave={updateCustomizedQuestions}
+                setQuestionsArray={setCustomizedQuestions}
+            />
         }
         </>
     );

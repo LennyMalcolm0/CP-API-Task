@@ -40,16 +40,24 @@ const CoverImage = () => {
         const imageUrl = URL.createObjectURL(e.target.files[0]);
 
         const requestBody = formData;
-        if (!requestBody) return;
+        if (!requestBody) {
+            setUploading(false);
+            return
+        }
         requestBody.attributes = {
             ...requestBody.attributes,
             coverImage: imageUrl
         }
         
-        await HttpClient.put(
+        const { error } = await HttpClient.put(
             "/api/144.9397931391233/programs/mock/application-form", 
             { data: requestBody }
         )
+        if (error) {
+            setUploading(false);
+            alert("Something went wrong while uploading your photo! Please try again.")
+            return
+        }
 
         setCoverImageUrl(imageUrl);
         setUploading(false);
