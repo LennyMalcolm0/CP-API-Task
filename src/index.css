@@ -9,6 +9,7 @@
     padding: 0;
     box-sizing: border-box;
     transition: all 0.25s ease;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -22,3 +23,17 @@ body {
 .font-notoSans {
     font-family: 'Noto Sans', sans-serif;
 }
+
+.active-nav::before {
+    content: ""; 
+    position: absolute;
+    top: 50%; 
+    right: -20px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    z-index: 9999999;
+    border-top: 20px solid transparent; 
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #00635B;
+  }

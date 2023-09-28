@@ -23,13 +23,13 @@ const AppLayout = ({children}: AppLayoutProps) => {
                     {headerItems.map((item, index) => (
                         <div 
                             key={index} 
-                            className={`h-[130px] w-[280px] cursor-pointer flex items-center
-                                ${index === 1 ? "bg-[#00635B] text-white nav-arrow" : "hover:opacity-80"}
+                            className={`h-[130px] w-[280px] cursor-pointer flex items-center relative
+                                ${index === 1 ? "bg-[#00635B] text-white active-nav" : "hover:opacity-80"}
                             `}
                         >
                             <div 
-                                className={`h-[78px] w-full text-xl font-medium grid place-content-center
-                                    ${index !== headerItems.length - 1 && "border-r border-[#C4C4C4]"}
+                                className={`h-[78px] w-full text-xl font-medium grid place-content-center 
+                                    ${index === 2 && "border-r border-[#C4C4C4]"}
                                 `}
                             >
                                 {item}
