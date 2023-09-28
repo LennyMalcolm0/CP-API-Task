@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useEffect, useRef, useState } from 'react';
 import QuestionChoice from "./QuestionChoice";
 import { QuestionTemplate, QuestionType } from '../dataTypes';
 import * as yup from 'yup';
@@ -65,10 +65,26 @@ const AddQuestionPopup = ({existingQuestions, setQuestionsArray, setShowPopup, o
         },
     });
 
+    const questionBoxRef = useRef<HTMLFormElement>(null);
+    useEffect(() => {
+        const handleClickOutsideQuestionBox = (event: MouseEvent) => {
+            if (questionBoxRef.current && !questionBoxRef.current.contains(event.target as Node)) {
+                setShowPopup(false);
+            }
+        };
+    
+        document.addEventListener("mousedown", handleClickOutsideQuestionBox);
+    
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutsideQuestionBox);
+        };
+    }, [questionBoxRef, setShowPopup]);
+
     return (  
         <div className="fixed inset-0 z-[999999] w-screen h-screen bg-[#1A1B1B] bg-opacity-70 grid place-content-center">
             <form 
                 onSubmit={formik.handleSubmit} 
+                ref={questionBoxRef}
                 className="w-[595px] max-h-[90vh] rounded-[20px] bg-white flex flex-col overflow-hidden"
             >
                 <div className="w-full p-8 rounded-t-[20px] text-[25px] font-semibold capitalize bg-[#D0F7FA]">Question</div>
