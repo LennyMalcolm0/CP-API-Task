@@ -1,6 +1,6 @@
 # Capital Placement API Task
 
-## Working features
+## Functional features
 - Fetch form data from API.
 - Add new question.
 - Update question.
