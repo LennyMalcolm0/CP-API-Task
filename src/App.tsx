@@ -16,7 +16,6 @@ function App() {
     HttpClient.get<ApplicationForm>("/api/144.9397931391233/programs/mock/application-form")
     .then(({ data }) => {
       if (!data) return;
-      console.log(data.data.attributes.customisedQuestions)
       setFormData(data.data)
     })
     .catch((error) => {
