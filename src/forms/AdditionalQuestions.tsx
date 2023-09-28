@@ -41,10 +41,14 @@ const AdditionalQuestions = () => {
             title="Additional Questions"
             content={(
                 <div className="px-[30px] pt-5 pb-10">
-                    {customisedQuestions.map((question) => (
+                    {customisedQuestions.map((question, index) => (
                         <FormQuestion 
                             key={question.id}
                             question={question}
+                            questionIndex={index}
+                            existingQuestions={customisedQuestions}
+                            onEdit={updateCustomizedQuestions}
+                            setQuestionsArray={setCustomizedQuestions}
                         />
                     ))}
 

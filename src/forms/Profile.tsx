@@ -65,10 +65,14 @@ const Profile = () => {
                         lastField
                     />
 
-                    {profileQuestions.map((question) => (
+                    {profileQuestions.map((question, index) => (
                         <FormQuestion 
                             key={question.id}
                             question={question}
+                            questionIndex={index}
+                            existingQuestions={profileQuestions}
+                            onEdit={updateProfileQuestions}
+                            setQuestionsArray={setProfileQuestions}
                         />
                     ))}
 

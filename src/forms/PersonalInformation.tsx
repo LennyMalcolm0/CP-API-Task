@@ -95,10 +95,14 @@ const PersonalInformation = () => {
                         lastField
                     />
 
-                    {personalQuestions.map((question) => (
+                    {personalQuestions.map((question, index) => (
                         <FormQuestion 
                             key={question.id}
                             question={question}
+                            questionIndex={index}
+                            existingQuestions={personalQuestions}
+                            onEdit={updatePersonalQuestions}
+                            setQuestionsArray={setPersonalQuestions}
                         />
                     ))}
 

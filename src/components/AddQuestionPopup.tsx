@@ -17,6 +17,7 @@ const questionSchema = yup.object().shape({
     disqualify: yup.boolean().optional(),
     other: yup.boolean().optional(),
 });
+
 const AddQuestionPopup = ({existingQuestions, setQuestionsArray, setShowPopup, onSave}: AddQuestionPopupProps) => {
     const [questionType, setQuestionType] = useState("");
     const [choiceOptions, setChoiceOptions] = useState<string[]>([""]);
@@ -58,7 +59,7 @@ const AddQuestionPopup = ({existingQuestions, setQuestionsArray, setShowPopup, o
                     setShowPopup(false);
                 } else {
                     setUploading(false);
-                    alert("Something went wrong while uploading your data! Please try again.");
+                    alert("Something went wrong! Please try again.");
                 }
             })
         },
@@ -103,6 +104,7 @@ const AddQuestionPopup = ({existingQuestions, setQuestionsArray, setShowPopup, o
                             }
                         </div>
                     </>
+                    
                     <div className="w-full mb-5">
                         <label htmlFor="type" className="text-xl font-semibold">Question</label>
                         <input 
